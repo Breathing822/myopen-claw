@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>销售业绩日报 | 2026年05月04日</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif; background: #F7FAFC; color: #1A202C; font-size: 14px; }
+.container { max-width: 100%; margin: 0 auto; padding: 12px; }
+.header { background: linear-gradient(135deg, #1A365D 0%, #2B6CB0 100%); color: white; padding: 16px; border-radius: 12px; margin-bottom: 12px; text-align: center; }
+.header h1 { font-size: 18px; margin-bottom: 4px; }
+.header p { opacity: 0.9; font-size: 11px; }
+.time-section { background: white; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.time-section .title { font-size: 10px; color: #4A5568; margin-bottom: 6px; font-weight: 600; }
+.progress-bar { background: #E2E8F0; border-radius: 6px; height: 6px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 6px; }
+.progress-fill.blue { background: linear-gradient(90deg, #4299E1, #38A169); }
+.progress-fill.purple { background: linear-gradient(90deg, #805AD5, #9F7AEA); }
+.progress-label { display: flex; justify-content: space-between; font-size: 9px; color: #718096; margin-top: 4px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 16px; }
+.kpi-card { background: white; border-radius: 10px; padding: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.kpi-card .title { font-size: 8px; color: #718096; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
+.kpi-card .main-value { font-size: 16px; font-weight: 700; color: #1A365D; margin-bottom: 4px; }
+.kpi-card .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; font-size: 8px; }
+.kpi-card .sub-item { background: #F7FAFC; padding: 4px 5px; border-radius: 3px; }
+.kpi-card .sub-item .label { color: #A0AEC0; margin-bottom: 1px; }
+.kpi-card .sub-item .value { color: #1A202C; font-weight: 600; }
+.kpi-card .sub-item .value.green { color: #276749; }
+.kpi-card .sub-item .value.yellow { color: #975A16; }
+.kpi-card .sub-item .value.red { color: #C53030; }
+.quarter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.quarter-card { background: white; border-radius: 10px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.quarter-card .quarter-title { font-size: 11px; font-weight: 700; color: #1A365D; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #E2E8F0; }
+.quarter-card .product-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #F0F0F0; }
+.quarter-card .product-row:last-child { border-bottom: none; }
+.quarter-card .product-name { font-size: 10px; color: #4A5568; }
+.quarter-card .product-stats { display: flex; align-items: center; gap: 8px; }
+.quarter-card .stat { text-align: center; }
+.quarter-card .stat-label { font-size: 8px; color: #A0AEC0; }
+.quarter-card .stat-value { font-size: 10px; font-weight: 600; color: #1A202C; }
+.quarter-card .stat-value.green { color: #276749; }
+.quarter-card .stat-value.yellow { color: #975A16; }
+.quarter-card .stat-value.red { color: #C53030; }
+.quarter-card .rate-badge { display: inline-block; padding: 1px 6px; border-radius: 8px; font-size: 8px; font-weight: 600; }
+.quarter-card .rate-badge.green { background: #C6EFCE; color: #276749; }
+.quarter-card .rate-badge.yellow { background: #FFEB9C; color: #975A16; }
+.quarter-card .rate-badge.red { background: #FFC7CE; color: #C53030; }
+.rebate-section { background: white; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.rebate-section .section-title { font-size: 12px; font-weight: 700; color: #1A365D; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #E2E8F0; }
+.rebate-section .section-title::before { content: "💰 "; }
+.rebate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.rebate-card { background: #F7FAFC; border-radius: 8px; padding: 10px; text-align: center; }
+.rebate-card .month { font-size: 10px; color: #718096; margin-bottom: 6px; font-weight: 600; }
+.rebate-card .value-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.rebate-card .value-label { font-size: 8px; color: #A0AEC0; }
+.rebate-card .value-num { font-size: 9px; font-weight: 600; color: #1A202C; }
+.rebate-card .value-num.green { color: #276749; }
+.rebate-card .value-num.red { color: #C53030; }
+.m3-card { background: white; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.m3-card .section-title { font-size: 12px; font-weight: 700; color: #1A365D; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #E2E8F0; }
+.m3-card .section-title::before { content: "💳 "; }
+.m3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.m3-item { background: #F7FAFC; border-radius: 8px; padding: 8px; text-align: center; }
+.m3-item .item-label { font-size: 8px; color: #718096; margin-bottom: 4px; }
+.m3-item .item-value { font-size: 13px; font-weight: 700; color: #1A202C; }
+.m3-item .item-unit { font-size: 7px; color: #A0AEC0; margin-top: 2px; }
+.m3-item .item-value.small { font-size: 10px; }
+.m3-item.last-month { background: #FAFAFA; border: 1px dashed #E2E8F0; }
+.m3-item.last-month .item-label { color: #A0AEC0; }
+.m3-item.last-month .item-value { color: #718096; }
+.channel-section { background: white; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.channel-section .section-title { font-size: 12px; font-weight: 700; color: #1A365D; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #E2E8F0; }
+.channel-section .section-title::before { content: "📱 "; }
+.channel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.channel-card { background: #F7FAFC; border-radius: 8px; padding: 10px; }
+.channel-card .channel-name { font-size: 10px; font-weight: 700; color: #1A365D; margin-bottom: 6px; text-align: center; padding-bottom: 4px; border-bottom: 1px solid #E2E8F0; }
+.channel-card .channel-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; font-size: 9px; }
+.channel-card .channel-row:last-child { margin-bottom: 0; }
+.channel-card .row-label { color: #718096; }
+.channel-card .row-value { font-weight: 600; color: #1A202C; }
+.channel-card .row-value.highlight { color: #276749; }
+.channel-card .row-value.warning { color: #975A16; }
+.channel-card .row-value.danger { color: #C53030; }
+.channel-card.new-media .channel-name { color: #2B6CB0; }
+.channel-card.external .channel-name { color: #38A169; }
+.channel-card.referral .channel-name { color: #DD6B20; }
+.channel-card.sub-dealer .channel-name { color: #805AD5; }
+.footer { text-align: center; padding: 12px; color: #A0AEC0; font-size: 9px; }
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .quarter-grid { grid-template-columns: 1fr; gap: 8px; }
+    .m3-grid { grid-template-columns: repeat(2, 1fr); }
+    .channel-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚛 销售业绩日报</h1>
+        <p>2026年05月04日 | 吉利远程新能源商用车</p>
+    </div>
+
+    <div class="time-section">
+        <div class="title">📅 当月进度（4日/30天）</div>
+        <div class="progress-bar"><div class="progress-fill blue" style="width:13.3%;"></div></div>
+        <div class="progress-label"><span>月初</span><span>13.3%</span><span>月末</span></div>
+    </div>
+
+    <div class="time-section">
+        <div class="title">📆 全年进度（5月/12月）</div>
+        <div class="progress-bar"><div class="progress-fill purple" style="width:41.7%;"></div></div>
+        <div class="progress-label"><span>1月</span><span>41.7%</span><span>12月</span></div>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card"><div class="title">📈 年度销量</div><div class="main-value">93.0</div><div class="sub-grid"><div class="sub-item"><div class="label">目标</div><div class="value">503.0</div></div><div class="sub-item"><div class="label">达成</div><div class="value red">18.5%</div></div></div></div>
+        <div class="kpi-card"><div class="title">💰 年度毛利</div><div class="main-value">¥72.9万</div><div class="sub-grid"><div class="sub-item"><div class="label">目标</div><div class="value">¥458.0万</div></div><div class="sub-item"><div class="label">达成</div><div class="value red">15.9%</div></div></div></div>
+        <div class="kpi-card"><div class="title">📅 当月销量</div><div class="main-value">2.0</div><div class="sub-grid"><div class="sub-item"><div class="label">目标</div><div class="value">50.0</div></div><div class="sub-item"><div class="label">达成</div><div class="value red">4.0%</div></div></div></div>
+        <div class="kpi-card"><div class="title">💵 月度毛利</div><div class="main-value">¥23,430</div><div class="sub-grid"><div class="sub-item"><div class="label">目标</div><div class="value">¥45万</div></div><div class="sub-item"><div class="label">达成</div><div class="value red">5.2%</div></div></div></div>
+        <div class="kpi-card"><div class="title">🚗 单车毛利</div><div class="main-value">¥11,715</div><div class="sub-grid"><div class="sub-item"><div class="label">年目标</div><div class="value">¥11,900</div></div><div class="sub-item"><div class="label">达成</div><div class="value green">98.4%</div></div></div></div>
+    </div>
+
+    <div class="quarter-grid">
+        <div class="quarter-card"><div class="quarter-title" style="background:#FFF9DB; padding:8px 12px; border-radius:10px 10px 0 0; border-bottom:2px solid #F6C344;">📌 当月产品线（4月）</div>
+            <div class="product-row"><span class="product-name">卡系</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">24.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value red">1.0</div></div><div class="stat"><span class="rate-badge red">4.2%</span></div></div></div>
+            <div class="product-row"><span class="product-name">VAN系</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">18.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value red">1.0</div></div><div class="stat"><span class="rate-badge red">5.6%</span></div></div></div>
+            <div class="product-row"><span class="product-name">超级VAN</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">8.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value red">0.0</div></div><div class="stat"><span class="rate-badge red">0.0%</span></div></div></div>
+            <div class="product-row" style="background:#F7FAFC; margin: 8px -12px -12px; padding: 8px 12px; border-radius: 0 0 10px 10px;"><span class="product-name" style="font-weight:700;">当月合计</span><div class="product-stats"><div class="stat"><div class="stat-label">总任务</div><div class="stat-value">50.0</div></div><div class="stat"><div class="stat-label">总达成</div><div class="stat-value" style="font-size:12px;">2.0</div></div><div class="stat"><span class="rate-badge red">4.0%</span></div></div></div>
+        </div>
+        <div class="quarter-card"><div class="quarter-title">📆 Q2产品线（4-6月）</div>
+            <div class="product-row"><span class="product-name">卡系</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">76.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value red">14.0</div></div><div class="stat"><span class="rate-badge red">18.4%</span></div></div></div>
+            <div class="product-row"><span class="product-name">VAN系</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">55.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value yellow">18.0</div></div><div class="stat"><span class="rate-badge yellow">32.7%</span></div></div></div>
+            <div class="product-row"><span class="product-name">超级VAN</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">23.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value yellow">6.0</div></div><div class="stat"><span class="rate-badge yellow">26.1%</span></div></div></div>
+            <div class="product-row" style="background:#F7FAFC; margin: 8px -12px -12px; padding: 8px 12px; border-radius: 0 0 10px 10px;"><span class="product-name" style="font-weight:700;">Q2合计</span><div class="product-stats"><div class="stat"><div class="stat-label">总任务</div><div class="stat-value">154.0</div></div><div class="stat"><div class="stat-label">总达成</div><div class="stat-value" style="font-size:12px;">38.0</div></div><div class="stat"><span class="rate-badge red">24.7%</span></div></div></div>
+        </div>
+        <div class="quarter-card"><div class="quarter-title">🎯 全年产品线进度</div>
+            <div class="product-row"><span class="product-name">卡系</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">233.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value red">38.0</div></div><div class="stat"><span class="rate-badge red">16.3%</span></div></div></div>
+            <div class="product-row"><span class="product-name">VAN系</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">190.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value red">44.0</div></div><div class="stat"><span class="rate-badge red">23.2%</span></div></div></div>
+            <div class="product-row"><span class="product-name">超级VAN</span><div class="product-stats"><div class="stat"><div class="stat-label">任务</div><div class="stat-value">80.0</div></div><div class="stat"><div class="stat-label">达成</div><div class="stat-value red">11.0</div></div><div class="stat"><span class="rate-badge red">13.8%</span></div></div></div>
+            <div class="product-row" style="background:#F7FAFC; margin: 8px -12px -12px; padding: 8px 12px; border-radius: 0 0 10px 10px;"><span class="product-name" style="font-weight:700;">全年合计</span><div class="product-stats"><div class="stat"><div class="stat-label">总任务</div><div class="stat-value">503.0</div></div><div class="stat"><div class="stat-label">总达成</div><div class="stat-value" style="font-size:12px;">93.0</div></div><div class="stat"><span class="rate-badge red">18.5%</span></div></div></div>
+        </div>
+    </div>
+
+    <div class="rebate-section">
+        <div class="section-title">M2返利明细（★ 4月滚动显示：2月/3月/4月）</div>
+        <div class="rebate-grid">
+            <div class="rebate-card"><div class="month">1月</div><div class="value-row"><span class="value-label">返利获取</span><span class="value-num">¥44,574</span></div><div class="value-row"><span class="value-label">已到账</span><span class="value-num">¥28,774</span></div><div class="value-row"><span class="value-label">差额</span><span class="value-num red">¥-15,800</span></div></div><div class="rebate-card"><div class="month">2月</div><div class="value-row"><span class="value-label">返利获取</span><span class="value-num">¥35,902</span></div><div class="value-row"><span class="value-label">已到账</span><span class="value-num">¥18,025</span></div><div class="value-row"><span class="value-label">差额</span><span class="value-num red">¥-17,877</span></div></div><div class="rebate-card"><div class="month">3月</div><div class="value-row"><span class="value-label">返利获取</span><span class="value-num">¥126,730</span></div><div class="value-row"><span class="value-label">已到账</span><span class="value-num">¥58,656</span></div><div class="value-row"><span class="value-label">差额</span><span class="value-num red">¥-68,074</span></div></div><div class="rebate-card"><div class="month">4月</div><div class="value-row"><span class="value-label">返利获取</span><span class="value-num">¥98,600</span></div><div class="value-row"><span class="value-label">已到账</span><span class="value-num">¥11,100</span></div><div class="value-row"><span class="value-label">差额</span><span class="value-num red">¥-87,500</span></div></div>
+        </div>
+    </div>
+
+    <div class="m3-card">
+        <div class="section-title">M3金融装潢</div>
+        <div class="m3-grid">
+            <div class="m3-item"><div class="item-label">当月金融台次</div><div class="item-value">¥2</div><div class="item-unit">台</div></div><div class="m3-item"><div class="item-label">当月金融渗透率</div><div class="item-value">100.0%</div></div><div class="m3-item"><div class="item-label">当月GPS服务费</div><div class="item-value">¥4,000</div><div class="item-unit">元</div></div><div class="m3-item"><div class="item-label">当月金融返佣</div><div class="item-value">¥5,055</div><div class="item-unit">元</div></div><div class="m3-item"><div class="item-label">当月上牌收入</div><div class="item-value">¥200</div><div class="item-unit">元</div></div><div class="m3-item"><div class="item-label">当月保险返佣</div><div class="item-value">¥0</div><div class="item-unit">元</div></div><div class="m3-item"><div class="item-label">当月装潢赠送/台</div><div class="item-value" style="color:#C53030;">¥-1,125</div></div>
+        </div>
+        <div class="m3-grid" style="margin-top:8px;">
+            <div class="m3-item last-month"><div class="item-label">上月金融台次</div><div class="item-value small">¥12</div></div><div class="m3-item last-month"><div class="item-label">上月金融渗透率</div><div class="item-value small">60.0%</div></div><div class="m3-item last-month"><div class="item-label">上月GPS服务费</div><div class="item-value small">¥19,000</div></div><div class="m3-item last-month"><div class="item-label">上月金融返佣</div><div class="item-value small">¥39,186</div></div><div class="m3-item last-month"><div class="item-label">上月上牌收入</div><div class="item-value small">¥1,000</div></div><div class="m3-item last-month"><div class="item-label">上月装潢赠送</div><div class="item-value small" style="color:#C53030;">¥-27,010</div></div>
+        </div>
+    </div>
+
+    <div class="channel-section">
+        <div class="section-title">渠道线索分析</div>
+        <div class="channel-grid">
+            <div class="channel-card"><div class="channel-name">🏠 展厅</div>
+    <div class="channel-row"><span class="row-label">客流</span><span class="row-value highlight">7.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约</span><span class="row-value">7.0</span></div>
+    <div class="channel-row"><span class="row-label">试驾</span><span class="row-value">0.0</span></div>
+    <div class="channel-row"><span class="row-label">成交</span><span class="row-value highlight">0.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约率</span><span class="row-value warning">1.0</span></div>
+    <div class="channel-row"><span class="row-label">成交率</span><span class="row-value danger">0.0%</span></div>
+    </div><div class="channel-card new-media"><div class="channel-name">📱 新媒体</div>
+    <div class="channel-row"><span class="row-label">有效线索</span><span class="row-value highlight">14.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约</span><span class="row-value">2.0</span></div>
+    <div class="channel-row"><span class="row-label">试驾</span><span class="row-value">0.0</span></div>
+    <div class="channel-row"><span class="row-label">成交</span><span class="row-value highlight">1.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约率</span><span class="row-value warning">14.3%</span></div>
+    <div class="channel-row"><span class="row-label">成交率</span><span class="row-value danger">7.1%</span></div>
+    </div><div class="channel-card external"><div class="channel-name">🚀 外拓</div>
+    <div class="channel-row"><span class="row-label">有效线索</span><span class="row-value highlight">0.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约</span><span class="row-value">1.0</span></div>
+    <div class="channel-row"><span class="row-label">试驾</span><span class="row-value">0.0</span></div>
+    <div class="channel-row"><span class="row-label">成交</span><span class="row-value highlight">0.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约率</span><span class="row-value warning">1.0</span></div>
+    <div class="channel-row"><span class="row-label">成交率</span><span class="row-value highlight">-</span></div>
+    </div><div class="channel-card referral"><div class="channel-name">🤝 转介绍</div>
+    <div class="channel-row"><span class="row-label">客流</span><span class="row-value highlight">0.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约</span><span class="row-value">0.0</span></div>
+    <div class="channel-row"><span class="row-label">试驾</span><span class="row-value">0.0</span></div>
+    <div class="channel-row"><span class="row-label">成交</span><span class="row-value highlight">1.0</span></div>
+    <div class="channel-row"><span class="row-label">邀约率</span><span class="row-value warning">0.0%</span></div>
+    <div class="channel-row"><span class="row-label">成交率</span><span class="row-value highlight">0.0%</span></div>
+    </div><div class="channel-card sub-dealer"><div class="channel-name">🏪 二网</div>
+    <div class="channel-row"><span class="row-label">巡店</span><span class="row-value">1.0</span></div>
+    <div class="channel-row"><span class="row-label">培训</span><span class="row-value">1.0</span></div>
+    <div class="channel-row"><span class="row-label">订单</span><span class="row-value">0.0</span></div>
+    <div class="channel-row"><span class="row-label">交付</span><span class="row-value highlight">0.0</span></div>
+    </div>
+        </div>
+    </div>
+
+    <div class="footer"><p>吉利远程新能源商用车 兴庆事业部 | 远程 | 2026年05月04日</p></div>
+</div>
+</body>
+</html>

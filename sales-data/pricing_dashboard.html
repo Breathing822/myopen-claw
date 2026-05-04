@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>价格合理度分析仪表盘</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0e1a; color: #e2e8f0; min-height: 100vh; padding: 24px; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: #60a5fa; font-size: 13px; text-decoration: none; margin-bottom: 16px; padding: 6px 12px; background: rgba(96,165,250,0.1); border-radius: 8px; transition: all 0.2s; }
+.back-link:hover { background: rgba(96,165,250,0.2); }
+.header { text-align: center; margin-bottom: 32px; }
+.header h1 { font-size: 28px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; }
+.header p { font-size: 14px; color: #94a3b8; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.kpi { background: #1e293b; border-radius: 14px; padding: 20px 24px; border: 1px solid #334155; position: relative; overflow: hidden; }
+.kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 14px 14px 0 0; }
+.kpi.blue::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.kpi.green::before { background: linear-gradient(90deg, #10b981, #34d399); }
+.kpi.orange::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.kpi.red::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+.kpi.purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.kpi-label { font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.kpi-value { font-size: 32px; font-weight: 700; color: #f8fafc; }
+.kpi-sub { font-size: 13px; color: #64748b; margin-top: 4px; }
+.dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+.dashboard.three-col { grid-template-columns: 1fr 1fr 1fr; }
+.full { grid-column: 1 / -1; }
+.card { background: #1e293b; border-radius: 14px; padding: 24px; border: 1px solid #334155; }
+.card-title { font-size: 16px; font-weight: 600; color: #f8fafc; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.card-title span { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.card-title .dot-blue { background: #3b82f6; }
+.card-title .dot-green { background: #10b981; }
+.card-title .dot-orange { background: #f59e0b; }
+.card-title .dot-red { background: #ef4444; }
+.card-title .dot-purple { background: #8b5cf6; }
+.chart-container { position: relative; height: 260px; }
+.chart-container.bar { height: 300px; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { text-align: left; padding: 10px 12px; background: #0f172a; color: #94a3b8; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #334155; }
+.data-table td { padding: 10px 12px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+.data-table tr:hover td { background: #0f172a; }
+.data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+.tag.ok { background: rgba(16,185,129,0.15); color: #34d399; }
+.tag.warn { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.tag.danger { background: rgba(239,68,68,0.15); color: #f87171; }
+.tag.info { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.tag.new { background: rgba(139,92,246,0.15); color: #a78bfa; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; justify-content: center; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #94a3b8; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.prog-wrap { margin-bottom: 12px; }
+.prog-label { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
+.prog-bar { height: 8px; background: #334155; border-radius: 4px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-item { background: #334155; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #cbd5e1; display: flex; flex-direction: column; gap: 4px; }
+.tag-item .t-name { font-weight: 600; color: #f8fafc; }
+.tag-item .t-val { font-size: 18px; font-weight: 700; }
+.tag-item .t-note { font-size: 11px; color: #64748b; }
+.tag-item.highlight { border: 1px solid #f87171; }
+.tag-item.highlight .t-name { color: #f87171; }
+.tag-item.highlight2 { border: 1px solid #fbbf24; }
+.tag-item.highlight2 .t-name { color: #fbbf24; }
+@media (max-width: 900px) { .dashboard { grid-template-columns: 1fr; } .dashboard.three-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← 驾驶舱</a>
+
+<div class="header">
+  <h1>💰 价格合理度分析仪表盘</h1>
+  <p>2026年05月04日 | 基于2026年价格政策数据</p>
+</div>
+
+<!-- KPI Cards -->
+<div class="kpi-grid">
+  <div class="kpi green">
+    <div class="kpi-label">轻商车型数量</div>
+    <div class="kpi-value">0</div>
+    <div class="kpi-sub">款</div>
+  </div>
+  <div class="kpi blue">
+    <div class="kpi-label">多商车型数量</div>
+    <div class="kpi-value">0</div>
+    <div class="kpi-sub">款</div>
+  </div>
+  <div class="kpi orange">
+    <div class="kpi-label">轻商平均指导价</div>
+    <div class="kpi-value">¥0.0万</div>
+    <div class="kpi-sub">均价</div>
+  </div>
+  <div class="kpi purple">
+    <div class="kpi-label">多商平均指导价</div>
+    <div class="kpi-value">¥0.0万</div>
+    <div class="kpi-sub">均价</div>
+  </div>
+</div>
+
+<!-- Charts -->
+<div class="dashboard">
+  <div class="card">
+    <div class="card-title"><span class="dot-blue"></span>轻商车系分布</div>
+    <div class="chart-container">
+      <canvas id="lightSeriesChart"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="dot-orange"></span>多商车型分布</div>
+    <div class="chart-container">
+      <canvas id="multiModelChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Light Commercial Price Table -->
+<div class="card full">
+  <div class="card-title"><span class="dot-green"></span>轻商车型价格明细（车系汇总）</div>
+  <table class="data-table">
+    <thead><tr><th>车系</th><th>车型数</th><th>指导价</th><th>销售价</th><th>二网价</th><th>进货价</th><th>净成本</th><th>台阶返利</th><th>月度激励</th></tr></thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<!-- Light Commercial Full Details -->
+<div class="card full">
+  <div class="card-title"><span class="dot-blue"></span>轻商车型完整明细</div>
+  <table class="data-table">
+    <thead><tr><th>序号</th><th>车系</th><th>车型</th><th>选装</th><th>指导价</th><th>销售价</th><th>二网价</th><th>进货价</th><th>净成本</th><th>台阶返利</th><th>月度激励</th></tr></thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<!-- Multi Commercial Table -->
+<div class="card full">
+  <div class="card-title"><span class="dot-orange"></span>多商车型价格明细</div>
+  <table class="data-table">
+    <thead><tr><th>序号</th><th>车型</th><th>大架号</th><th>指导价</th><th>权益价</th><th>二网价</th><th>进货价</th><th>进销差</th><th>净成本</th><th>建店返利</th><th>交付佣金</th><th>基础返利</th></tr></thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+<script>
+new Chart(document.getElementById('lightSeriesChart'), {
+  type: 'doughnut',
+  data: {
+    labels: [],
+    datasets: [{
+      data: [],
+      backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'],
+      borderWidth: 0
+    }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } } }
+});
+
+new Chart(document.getElementById('multiModelChart'), {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: '车型数量',
+      data: [],
+      backgroundColor: '#f59e0b',
+      borderRadius: 8
+    }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#94a3b8' } } }, scales: { x: { ticks: { color: '#94a3b8', maxRotation: 45 }, grid: { color: '#334155' } }, y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } } } }
+});
+</script>
+</body>
+</html>
