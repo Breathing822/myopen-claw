@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传祺 2026年5-6月 战略分析报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0e17; color: #e8eaed; min-height: 100vh; }
+        
+        /* Header */
+        .hero { background: linear-gradient(135deg, #0d1421 0%, #1a2744 50%, #0d1421 100%); padding: 32px 40px; border-bottom: 1px solid #1e3a5f; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26,54,92,0.4) 0%, transparent 70%); pointer-events: none; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.3); color: #38bdf8; font-size: 12px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; }
+        .hero h1 { font-size: 26px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; letter-spacing: -0.3px; }
+        .hero .subtitle { color: #94a3b8; font-size: 14px; }
+        .hero .meta { display: flex; gap: 24px; margin-top: 16px; font-size: 13px; color: #64748b; }
+        .hero .meta span { display: flex; align-items: center; gap: 6px; }
+        
+        /* KPI Row */
+        .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 24px 32px; background: #0d1421; }
+        .kpi { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border: 1px solid #1f2937; border-radius: 12px; padding: 20px 24px; position: relative; overflow: hidden; }
+        .kpi::after { content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: radial-gradient(circle at top right, rgba(56,189,248,0.1), transparent); }
+        .kpi-label { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .kpi-value { font-size: 28px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
+        .kpi-sub { font-size: 12px; color: #38bdf8; }
+        .kpi.high .kpi-value { color: #fbbf24; }
+        .kpi.danger .kpi-value { color: #f87171; }
+        .kpi.success .kpi-value { color: #34d399; }
+        
+        /* Grid Layout */
+        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; padding: 0 32px 32px; }
+        .col-6 { grid-column: span 6; }
+        .col-7 { grid-column: span 7; }
+        .col-5 { grid-column: span 5; }
+        .col-8 { grid-column: span 8; }
+        .col-4 { grid-column: span 4; }
+        .col-12 { grid-column: span 12; }
+        
+        /* Card */
+        .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; }
+        .card-header { padding: 16px 20px; border-bottom: 1px solid #1f2937; display: flex; align-items: center; justify-content: space-between; }
+        .card-title { font-size: 14px; font-weight: 600; color: #f8fafc; display: flex; align-items: center; gap: 8px; }
+        .card-title .icon { font-size: 16px; }
+        .card-body { padding: 20px; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 12px; background: #0f172a; color: #94a3b8; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #1f2937; }
+        td { padding: 10px 12px; border-bottom: 1px solid #0f172a; color: #cbd5e1; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #0f172a; }
+        
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .tag-gold { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .tag-green { background: rgba(52,211,153,0.15); color: #34d399; }
+        .tag-red { background: rgba(248,113,113,0.15); color: #f87171; }
+        .tag-blue { background: rgba(56,189,248,0.15); color: #38bdf8; }
+        .tag-purple { background: rgba(167,139,250,0.15); color: #a78bfa; }
+        
+        .text-gold { color: #fbbf24; font-weight: 600; }
+        .text-green { color: #34d399; font-weight: 600; }
+        .text-red { color: #f87171; font-weight: 600; }
+        .text-blue { color: #38bdf8; font-weight: 600; }
+        .text-purple { color: #a78bfa; font-weight: 600; }
+        
+        /* Strategy Cards */
+        .strategy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .strategy-item { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 1px solid #1e3a5f; border-radius: 10px; padding: 16px; position: relative; }
+        .strategy-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px 0 0 3px; }
+        .strategy-item.prio-high::before { background: #f87171; }
+        .strategy-item.prio-med::before { background: #fbbf24; }
+        .strategy-item.prio-low::before { background: #34d399; }
+        .strategy-title { font-size: 13px; font-weight: 600; color: #f8fafc; margin-bottom: 6px; }
+        .strategy-desc { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+        .strategy-metric { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+        
+        /* Formula Box */
+        .formula-box { background: #0f172a; border: 1px solid #1e3a5f; border-radius: 8px; padding: 16px 20px; font-family: 'SF Mono', 'Consolas', monospace; font-size: 14px; color: #38bdf8; text-align: center; margin: 12px 0; }
+        .formula-box .highlight { color: #fbbf24; font-weight: 700; }
+        
+        /* Insight Box */
+        .insight { background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #94a3b8; line-height: 1.6; margin-top: 12px; }
+        .insight::before { content: '💡 战略洞察'; display: block; font-weight: 600; color: #38bdf8; margin-bottom: 6px; font-size: 12px; }
+        .insight.danger { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.2); }
+        .insight.danger::before { content: '⚠️ 风险提示'; color: #f87171; }
+        .insight.success { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.2); }
+        .insight.success::before { content: '🎯 机会窗口'; color: #34d399; }
+        .insight.warning { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.2); }
+        .insight.warning::before { content: '📊 政策要点'; color: #fbbf24; }
+        
+        /* Priority Matrix */
+        .matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .matrix-item { background: #0f172a; border-radius: 8px; padding: 14px; }
+        .matrix-item .rank { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+        .matrix-item .name { font-size: 13px; color: #f8fafc; font-weight: 600; margin-bottom: 2px; }
+        .matrix-item .reward { font-size: 12px; color: #94a3b8; }
+        
+        /* Timeline */
+        .timeline { position: relative; padding-left: 24px; }
+        .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #1e3a5f; }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item::before { content: ''; position: absolute; left: -20px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #38bdf8; border: 2px solid #0a0e17; }
+        .timeline-item .date { font-size: 11px; color: #38bdf8; font-weight: 600; margin-bottom: 4px; }
+        .timeline-item .event { font-size: 13px; color: #cbd5e1; }
+        
+        /* Chart Placeholder */
+        .chart-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .chart-label { width: 140px; font-size: 12px; color: #94a3b8; text-align: right; flex-shrink: 0; }
+        .chart-bar-fill { height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 11px; font-weight: 600; color: #0a0e17; min-width: 40px; }
+        .chart-bar-bg { flex: 1; height: 24px; background: #1f2937; border-radius: 4px; overflow: hidden; }
+        
+        .section-title { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #1f2937; }
+        
+        /* Footer */
+        .footer { text-align: center; padding: 24px; color: #475569; font-size: 11px; border-top: 1px solid #1f2937; margin-top: 24px; }
+        
+        /* Utility */
+        .flex { display: flex; }
+        .gap-8 { gap: 8px; }
+        .mt-12 { margin-top: 12px; }
+        .mb-8 { margin-bottom: 8px; }
+        .text-center { text-align: center; }
+        .font-mono { font-family: 'SF Mono', 'Consolas', monospace; }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-badge">📋 战略分析报告</div>
+    <h1>传祺 2026年5-6月销售政策<br>战略指导报告</h1>
+    <div class="subtitle">基于 J-YXXS2026075 文件的深度解读与战略建议</div>
+    <div class="meta">
+        <span>📅 政策周期：2026年5月1日 — 6月30日</span>
+        <span>🏢 适用对象：销售店董事长、总经理</span>
+        <span>📌 报告生成：2026年5月7日</span>
+    </div>
+</div>
+
+<!-- KPI Row -->
+<div class="kpi-row">
+    <div class="kpi high">
+        <div class="kpi-label">最高单台奖励</div>
+        <div class="kpi-value">¥36,000</div>
+        <div class="kpi-sub">向往M8乾崑PHEV</div>
+    </div>
+    <div class="kpi success">
+        <div class="kpi-label">最高折扣力度</div>
+        <div class="kpi-value">5.0%</div>
+        <div class="kpi-sub">M8/GS8/S7系列</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">E8 HEV竞品补贴</div>
+        <div class="kpi-value">¥20,000</div>
+        <div class="kpi-sub">按终端实绩计算</div>
+    </div>
+    <div class="kpi danger">
+        <div class="kpi-label">超目标奖励上限</div>
+        <div class="kpi-value">¥3,000</div>
+        <div class="kpi-sub">达成110%以上部分/台</div>
+    </div>
+</div>
+
+<div style="padding: 24px 32px 0;">
+    <div class="insight warning">
+        本报告核心结论：政策明显向<strong class="text-gold">M8系列</strong>和<strong class="text-gold">向往M8 PHEV</strong>倾斜，返利高达<strong>3.2-3.6万/台</strong>；小车系列（影速/影豹/M6）以定额折扣为主，灵活度高但利润空间有限。核心公式：<strong>奖励 = 终端奖励标准 × 终端达成系数(A) × 提车达成系数(T)</strong>
+    </div>
+</div>
+
+<!-- Main Grid -->
+<div class="grid">
+
+    <!-- ========== 左侧：车型战略优先级 ========== -->
+    <div class="col-7">
+        <div class="card" style="height:100%;">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">🏆</span> 一、车型战略优先级矩阵</div>
+                <span class="tag tag-gold">核心参考</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 目标达成奖 — 车型奖励排名</p>
+                
+                <div class="chart-bar">
+                    <div class="chart-label">向往M8乾崑PHEV</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:100%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">¥36,000</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">M8大师燃油/HEV</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:94%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">¥34,000</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">M8宗师燃油/HEV</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:89%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">¥32,000</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">E8 PHEV MAX+</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:58%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);">¥21,000</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">向往S7 非PRO+</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:56%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);">¥20,000</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">E8 PHEV 其他版</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:31%;background:linear-gradient(90deg,#a78bfa,#8b5cf6);">¥11,000</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">GS8 系列</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:40%;background:linear-gradient(90deg,#a78bfa,#8b5cf6);">¥14,500</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">GS3 影速 / 影豹</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:17%;background:linear-gradient(90deg,#64748b,#475569);">¥6,000</div></div>
+                </div>
+                
+                <div class="insight success mt-12">
+                    战略结论：大车系列（M8/GS8/向往S7/E8）返利显著高于小车系列。若追求返利最大化，应优先推动<strong>M8大师</strong>和<strong>向往M8 PHEV</strong>系列销售。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 右侧：系数计算规则 ========== -->
+    <div class="col-5">
+        <div class="card" style="height:100%;">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">⚙️</span> 二、系数计算规则</div>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 终端达成系数 (A)</p>
+                <table>
+                    <tr><td class="text-green">A ≥ 100%</td><td class="text-green" style="text-align:right;font-weight:700;">系数 = 1.0</td></tr>
+                    <tr><td class="text-gold">80% ≤ A < 100%</td><td class="text-gold" style="text-align:right;font-weight:700;">系数 = A（按实际）</td></tr>
+                    <tr><td class="text-red">A < 80%</td><td class="text-red" style="text-align:right;font-weight:700;">系数 = 0.5</td></tr>
+                </table>
+                
+                <p class="section-title mt-12">▎ 提车达成系数 (T)</p>
+                <table style="font-size:12px;">
+                    <tr><th>5-6月提车达成率 T</th><th style="text-align:center;">5月≥90%</th><th style="text-align:center;">5月<90%</th></tr>
+                    <tr><td>T ≥ 100%</td><td style="text-align:center;" class="text-green">1.0</td><td style="text-align:center;" class="text-blue">0.9</td></tr>
+                    <tr><td>80% ≤ T < 100%</td><td style="text-align:center;" class="text-blue">0.8</td><td style="text-align:center;" class="text-gold">0.7</td></tr>
+                    <tr><td>T < 80%</td><td style="text-align:center;" class="text-gold">0.6</td><td style="text-align:center;" class="text-red">0.5</td></tr>
+                </table>
+                
+                <div class="insight">
+                    <strong>库存豁免规则：</strong>单月库存深度 k（月末库存÷终端目标）> 1.35 时，该月提车系数按1.0计算。建议保持合理库存水位，既满足豁免条件，又避免资金压占。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 战略执行计划 ========== -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">📋</span> 三、战略执行计划（5-6月）</div>
+            </div>
+            <div class="card-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+                    
+                    <!-- 5月重点 -->
+                    <div>
+                        <p class="section-title">📅 5月冲刺策略</p>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="date">5月第1-2周</div>
+                                <div class="event">锁定M8/GS8库存，确认提车节奏</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="date">5月第3周</div>
+                                <div class="event">冲刺终端达成率≥100%，触发系数1.0</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="date">5月第4周</div>
+                                <div class="event">提车达成率≥90%（关键门槛！），锁定系数0.8以上</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="date">5月底</div>
+                                <div class="event">若达成D≥105%，叠加超目标奖励</div>
+                            </div>
+                        </div>
+                        <div class="insight success" style="margin-top:12px;">
+                            5月核心目标：终端达成率 ≥ 100% + 提车达成率 ≥ 90%，双重锁定高系数
+                        </div>
+                    </div>
+                    
+                    <!-- 6月重点 -->
+                    <div>
+                        <p class="section-title">📅 6月收官策略</p>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="date">6月第1-2周</div>
+                                <div class="event">关注双月累计T值，评估6月冲量空间</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="date">6月第3周</div>
+                                <div class="event">利用库存豁免规则（k>1.35），提升系数</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="date">6月底</div>
+                                <div class="event">按双月累计达成率差额结算，补发奖励</div>
+                            </div>
+                        </div>
+                        <div class="insight warning" style="margin-top:12px;">
+                            6月注意：4-5月打切车型（E8 MAX+/M8大师混动）库存清理可享额外¥1-2万/台补贴
+                        </div>
+                    </div>
+                    
+                    <!-- 全周期重点 -->
+                    <div>
+                        <p class="section-title">📅 全周期执行重点</p>
+                        <div class="strategy-grid">
+                            <div class="strategy-item prio-high">
+                                <div class="strategy-title">🔴 全力推M8系列</div>
+                                <div class="strategy-desc">返利最高3.4-3.6万/台，政策最倾斜车型</div>
+                                <span class="strategy-metric" style="background:rgba(248,113,113,0.2);color:#f87171;">优先级：最高</span>
+                            </div>
+                            <div class="strategy-item prio-med">
+                                <div class="strategy-title">🟡 关注向往S7</div>
+                                <div class="strategy-desc">非PRO+返利2万/台，PRO+仅3千，结构优化关键</div>
+                                <span class="strategy-metric" style="background:rgba(251,191,36,0.2);color:#fbbf24;">优先级：高</span>
+                            </div>
+                            <div class="strategy-item prio-high">
+                                <div class="strategy-title">🔴 E8 HEV 竞品打击</div>
+                                <div class="strategy-desc">固定补贴2万/台，可用于市场竞争策略</div>
+                                <span class="strategy-metric" style="background:rgba(248,113,113,0.2);color:#f87171;">竞争力工具</span>
+                            </div>
+                            <div class="strategy-item prio-low">
+                                <div class="strategy-title">🟢 小车灵活出货</div>
+                                <div class="strategy-desc">影速/影豹/M6定额折扣，适合订单式销售</div>
+                                <span class="strategy-metric" style="background:rgba(52,211,153,0.2);color:#34d399;">辅助角色</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 折扣结构对比 ========== -->
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">💰</span> 四、提车折扣结构对比</div>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 百分比折扣类（直接折让）</p>
+                <table>
+                    <tr>
+                        <th>车型</th>
+                        <th style="text-align:center;">基本返点</th>
+                        <th style="text-align:center;">本地支援</th>
+                        <th style="text-align:center;">合计折扣</th>
+                    </tr>
+                    <tr>
+                        <td>M8燃油/HEV、GS8、向往S7</td>
+                        <td style="text-align:center;">3.0%</td>
+                        <td style="text-align:center;" class="text-blue">2.0%</td>
+                        <td style="text-align:center;"><span class="tag tag-gold">5.0%</span></td>
+                    </tr>
+                    <tr>
+                        <td>E8系列、向往M8 PHEV、向往S9</td>
+                        <td style="text-align:center;">2.0%</td>
+                        <td style="text-align:center;" class="text-blue">1.0%</td>
+                        <td style="text-align:center;"><span class="tag tag-blue">3.0%</span></td>
+                    </tr>
+                </table>
+                
+                <p class="section-title mt-12">▎ 定额折扣类（固定金额）</p>
+                <table>
+                    <tr><th>车型</th><th style="text-align:right;">折让金额</th></tr>
+                    <tr><td>GS4 MAX</td><td style="text-align:right;" class="text-gold">¥28,000</td></tr>
+                    <tr><td>M6 系列</td><td style="text-align:right;" class="text-gold">¥23,000</td></tr>
+                    <tr><td>影豹 1.5T</td><td style="text-align:right;" class="text-blue">¥22,000</td></tr>
+                    <tr><td>影豹 2.0T</td><td style="text-align:right;" class="text-blue">¥12,000</td></tr>
+                    <tr><td>GS3 影速</td><td style="text-align:right;" class="text-blue">¥11,500</td></tr>
+                </table>
+                
+                <div class="insight mt-12">
+                    定价策略建议：大车系列（M8/GS8）折扣空间更大（5%），小车系列（影速/影豹）采用定额折扣，灵活可控但让利空间有限。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 风险与机会 ========== -->
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">⚠️</span> 五、风险预警 & 机会窗口</div>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ ⚠️ 风险预警</p>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    <div style="background:#0f172a;border-radius:8px;padding:12px 14px;border-left:3px solid #f87171;">
+                        <div style="font-size:13px;font-weight:600;color:#f87171;margin-bottom:4px;">系数断崖风险</div>
+                        <div style="font-size:12px;color:#94a3b8;">若终端达成率A跌至80%以下，系数从0.8直接跌至<strong class="text-red">0.5</strong>，奖励缩水40%。</div>
+                    </div>
+                    <div style="background:#0f172a;border-radius:8px;padding:12px 14px;border-left:3px solid #fbbf24;">
+                        <div style="font-size:13px;font-weight:600;color:#fbbf24;margin-bottom:4px;">5月门槛陷阱</div>
+                        <div style="font-size:12px;color:#94a3b8;">提车达成率若5月<strong class="text-gold">低于90%</strong>，即使双月T≥100%，也只能拿到0.9系数而非1.0。</div>
+                    </div>
+                    <div style="background:#0f172a;border-radius:8px;padding:12px 14px;border-left:3px solid #a78bfa;">
+                        <div style="font-size:13px;font-weight:600;color:#a78bfa;margin-bottom:4px;">特殊折扣车辆排除</div>
+                        <div style="font-size:12px;color:#94a3b8;">非标准折扣提车的车辆，原则上<strong>不享受</strong>任何额外政策返利（除特殊折扣政策本身）。</div>
+                    </div>
+                </div>
+                
+                <p class="section-title mt-12">▎ 🎯 机会窗口</p>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    <div style="background:#0f172a;border-radius:8px;padding:12px 14px;border-left:3px solid #34d399;">
+                        <div style="font-size:13px;font-weight:600;color:#34d399;margin-bottom:4px;">市占率豁免</div>
+                        <div style="font-size:12px;color:#94a3b8;">若城市市占率环比增长幅度 > 全国环比增长，可触发豁免，<strong class="text-green">单月系数按1.0计算</strong>。</div>
+                    </div>
+                    <div style="background:#0f172a;border-radius:8px;padding:12px 14px;border-left:3px solid #34d399;">
+                        <div style="font-size:13px;font-weight:600;color:#34d399;margin-bottom:4px;">库存豁免规则</div>
+                        <div style="font-size:12px;color:#94a3b8;">月末k>1.35时，该月提车达成系数按1.0计算——<strong>适当备货可解锁更高系数</strong>。</div>
+                    </div>
+                    <div style="background:#0f172a;border-radius:8px;padding:12px 14px;border-left:3px solid #38bdf8;">
+                        <div style="font-size:13px;font-weight:600;color:#38bdf8;margin-bottom:4px;">打切车型清理</div>
+                        <div style="font-size:12px;color:#94a3b8;">E8 MAX+/龙腾+/向往M8宗师额外补贴<strong class="text-blue">¥2万/台</strong>，M8大师超级混动¥1万/台。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 核心计算示例 ========== -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">🧮</span> 六、奖励计算示例</div>
+            </div>
+            <div class="card-body">
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+                    
+                    <div style="background:#0f172a;border-radius:10px;padding:18px;border:1px solid #1e3a5f;">
+                        <div style="font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:12px;">📗 情景A：达标门店</div>
+                        <table style="font-size:12px;">
+                            <tr><td class="text-blue">车型</td><td class="text-green" style="text-align:right;">M8大师 HEV</td></tr>
+                            <tr><td class="text-blue">终端达成率A</td><td style="text-align:right;">105%（≥100%）</td></tr>
+                            <tr><td class="text-blue">提车达成率T</td><td style="text-align:right;">100%（5月≥90%）</td></tr>
+                            <tr><td class="text-blue">库存深度k</td><td style="text-align:right;">1.2（无豁免）</td></tr>
+                            <tr><td colspan="2" style="border-top:1px solid #1e3a5f;padding-top:8px;margin-top:4px;"></td></tr>
+                            <tr><td class="text-blue">终端奖励标准</td><td style="text-align:right;">¥34,000</td></tr>
+                            <tr><td class="text-blue">× 终端系数A</td><td style="text-align:right;">× 1.0</td></tr>
+                            <tr><td class="text-blue">× 提车系数T</td><td style="text-align:right;">× 1.0</td></tr>
+                            <tr><td style="font-weight:700;color:#f8fafc;">最终奖励</td><td style="text-align:right;font-weight:700;color:#fbbf24;font-size:16px;">¥34,000/台</td></tr>
+                        </table>
+                        <div class="insight success" style="margin-top:10px;font-size:11px;padding:8px 10px;">
+                            系数全拿满！单台奖励最高水平。
+                        </div>
+                    </div>
+                    
+                    <div style="background:#0f172a;border-radius:10px;padding:18px;border:1px solid #1e3a5f;">
+                        <div style="font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:12px;">📙 情景B：中等达成</div>
+                        <table style="font-size:12px;">
+                            <tr><td class="text-blue">车型</td><td style="text-align:right;">向往S7 非PRO+</td></tr>
+                            <tr><td class="text-blue">终端达成率A</td><td style="text-align:right;">90%（80%-100%区间）</td></tr>
+                            <tr><td class="text-blue">提车达成率T</td><td style="text-align:right;">95%（5月≥90%）</td></tr>
+                            <tr><td class="text-blue">库存深度k</td><td style="text-align:right;">1.4（满足豁免）</td></tr>
+                            <tr><td colspan="2" style="border-top:1px solid #1e3a5f;padding-top:8px;margin-top:4px;"></td></tr>
+                            <tr><td class="text-blue">终端奖励标准</td><td style="text-align:right;">¥20,000</td></tr>
+                            <tr><td class="text-blue">× 终端系数A</td><td style="text-align:right;">× 0.9</td></tr>
+                            <tr><td class="text-blue">× 提车系数T</td><td style="text-align:right;">× 1.0（k豁免）</td></tr>
+                            <tr><td style="font-weight:700;color:#f8fafc;">最终奖励</td><td style="text-align:right;font-weight:700;color:#fbbf24;font-size:16px;">¥18,000/台</td></tr>
+                        </table>
+                        <div class="insight" style="margin-top:10px;font-size:11px;padding:8px 10px;">
+                            库存豁免救了提车系数，终端达成率拖累了整体。
+                        </div>
+                    </div>
+                    
+                    <div style="background:#0f172a;border-radius:10px;padding:18px;border:1px solid #1e3a5f;">
+                        <div style="font-size:14px;font-weight:700;color:#f87171;margin-bottom:12px;">📕 情景C：未达标门店</div>
+                        <table style="font-size:12px;">
+                            <tr><td class="text-blue">车型</td><td style="text-align:right;">GS3 影速</td></tr>
+                            <tr><td class="text-blue">终端达成率A</td><td style="text-align:right;">75%（<80%，断崖）</td></tr>
+                            <tr><td class="text-blue">提车达成率T</td><td style="text-align:right;">85%（5月<90%）</td></tr>
+                            <tr><td class="text-blue">库存深度k</td><td style="text-align:right;">0.9（无豁免）</td></tr>
+                            <tr><td colspan="2" style="border-top:1px solid #1e3a5f;padding-top:8px;margin-top:4px;"></td></tr>
+                            <tr><td class="text-blue">终端奖励标准</td><td style="text-align:right;">¥6,000</td></tr>
+                            <tr><td class="text-blue">× 终端系数A</td><td style="text-align:right;">× 0.5（断崖！）</td></tr>
+                            <tr><td class="text-blue">× 提车系数T</td><td style="text-align:right;">× 0.7</td></tr>
+                            <tr><td style="font-weight:700;color:#f8fafc;">最终奖励</td><td style="text-align:right;font-weight:700;color:#f87171;font-size:16px;">¥2,100/台</td></tr>
+                        </table>
+                        <div class="insight danger" style="margin-top:10px;font-size:11px;padding:8px 10px;">
+                            A<80%触发断崖！实际奖励缩水至理论的35%。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="formula-box mt-12">
+                    <span class="highlight">核心公式：</span>各车型目标达成奖 = 终端奖励标准 × 终端达成系数(A) × 提车达成系数(T)
+                </div>
+                
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+                    <div class="insight success">
+                        <strong>结算节奏：</strong>5月结束后先<strong>预付</strong>奖励，6月结束后按<strong>双月累计达成率</strong>进行差额结算。
+                    </div>
+                    <div class="insight warning">
+                        <strong>特别说明：</strong>1月31日在店库存结算标准 = (指导价×基本返点+目标达成奖) - 已享受提车折扣。影速/GS4 MAX/影豹/M6<strong>无差额结算</strong>。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    传祺 2026年5-6月销售政策 · 战略分析报告 · J-YXXS2026075 · 仅供参考，不构成经营决策依据
+</div>
+
+</body>
+</html>
