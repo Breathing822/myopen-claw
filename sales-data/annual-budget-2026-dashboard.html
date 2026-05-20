@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铠程铠骏 2026年度预算报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0e17; color: #e8eaed; min-height: 100vh; }
+
+        /* Header */
+        .hero { background: linear-gradient(135deg, #0d1421 0%, #1a2744 50%, #0d1421 100%); padding: 32px 40px; border-bottom: 1px solid #1e3a5f; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26,54,92,0.4) 0%, transparent 70%); pointer-events: none; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.3); color: #38bdf8; font-size: 12px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; }
+        .hero h1 { font-size: 26px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; letter-spacing: -0.3px; }
+        .hero .subtitle { color: #94a3b8; font-size: 14px; }
+        .hero .meta { display: flex; gap: 24px; margin-top: 16px; font-size: 13px; color: #64748b; flex-wrap: wrap; }
+        .hero .meta span { display: flex; align-items: center; gap: 6px; }
+
+        /* KPI Row */
+        .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 24px 32px; background: #0d1421; }
+        .kpi { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border: 1px solid #1f2937; border-radius: 12px; padding: 20px 24px; position: relative; overflow: hidden; }
+        .kpi::after { content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: radial-gradient(circle at top right, rgba(56,189,248,0.1), transparent); }
+        .kpi-label { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .kpi-value { font-size: 28px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
+        .kpi-sub { font-size: 12px; color: #38bdf8; }
+        .kpi.high .kpi-value { color: #fbbf24; }
+        .kpi.danger .kpi-value { color: #f87171; }
+        .kpi.success .kpi-value { color: #34d399; }
+        .kpi.purple .kpi-value { color: #a78bfa; }
+
+        /* Grid Layout */
+        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; padding: 0 32px 32px; }
+        .col-3 { grid-column: span 3; }
+        .col-4 { grid-column: span 4; }
+        .col-5 { grid-column: span 5; }
+        .col-6 { grid-column: span 6; }
+        .col-7 { grid-column: span 7; }
+        .col-8 { grid-column: span 8; }
+        .col-12 { grid-column: span 12; }
+
+        /* Card */
+        .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; }
+        .card-header { padding: 16px 20px; border-bottom: 1px solid #1f2937; display: flex; align-items: center; justify-content: space-between; }
+        .card-title { font-size: 14px; font-weight: 600; color: #f8fafc; display: flex; align-items: center; gap: 8px; }
+        .card-title .icon { font-size: 16px; }
+        .card-body { padding: 20px; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 12px; background: #0f172a; color: #94a3b8; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #1f2937; }
+        td { padding: 10px 12px; border-bottom: 1px solid #0f172a; color: #cbd5e1; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #0f172a; }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .tag-gold { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .tag-green { background: rgba(52,211,153,0.15); color: #34d399; }
+        .tag-red { background: rgba(248,113,113,0.15); color: #f87171; }
+        .tag-blue { background: rgba(56,189,248,0.15); color: #38bdf8; }
+        .tag-purple { background: rgba(167,139,250,0.15); color: #a78bfa; }
+
+        .text-gold { color: #fbbf24; font-weight: 600; }
+        .text-green { color: #34d399; font-weight: 600; }
+        .text-red { color: #f87171; font-weight: 600; }
+        .text-blue { color: #38bdf8; font-weight: 600; }
+        .text-purple { color: #a78bfa; font-weight: 600; }
+
+        /* Chart Bars */
+        .chart-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .chart-label { width: 100px; font-size: 12px; color: #94a3b8; text-align: right; flex-shrink: 0; }
+        .chart-bar-fill { height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 11px; font-weight: 600; color: #0a0e17; min-width: 40px; }
+        .chart-bar-bg { flex: 1; height: 24px; background: #1f2937; border-radius: 4px; overflow: hidden; }
+
+        /* Insight Box */
+        .insight { background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #94a3b8; line-height: 1.6; margin-top: 12px; }
+        .insight::before { content: '💡 核心洞察'; display: block; font-weight: 600; color: #38bdf8; margin-bottom: 6px; font-size: 12px; }
+        .insight.danger { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.2); }
+        .insight.danger::before { content: '⚠️ 风险提示'; color: #f87171; }
+        .insight.success { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.2); }
+        .insight.success::before { content: '🎯 亮点关注'; color: #34d399; }
+        .insight.warning { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.2); }
+        .insight.warning::before { content: '📊 重要发现'; color: #fbbf24; }
+
+        .section-title { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #1f2937; }
+
+        /* Progress Bar */
+        .progress { height: 8px; background: #1f2937; border-radius: 4px; overflow: hidden; margin: 6px 0; }
+        .progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .progress-fill.blue { background: linear-gradient(90deg, #38bdf8, #0ea5e9); }
+        .progress-fill.green { background: linear-gradient(90deg, #34d399, #10b981); }
+        .progress-fill.gold { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .progress-fill.red { background: linear-gradient(90deg, #f87171, #ef4444); }
+        .progress-fill.purple { background: linear-gradient(90deg, #a78bfa, #8b5cf6); }
+
+        /* Growth indicator */
+        .growth { font-size: 12px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+        .growth.up { color: #34d399; background: rgba(52,211,153,0.1); }
+        .growth.down { color: #f87171; background: rgba(248,113,113,0.1); }
+
+        /* Mini grid for small cards */
+        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .mini-stat { background: #0f172a; border-radius: 8px; padding: 14px; text-align: center; }
+        .mini-stat .value { font-size: 20px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
+        .mini-stat .label { font-size: 11px; color: #64748b; }
+        .mini-stat .sub { font-size: 11px; color: #38bdf8; margin-top: 2px; }
+
+        /* Channel breakdown */
+        .channel-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #0f172a; }
+        .channel-item:last-child { border-bottom: none; }
+        .channel-name { font-size: 13px; color: #cbd5e1; }
+        .channel-value { font-size: 13px; font-weight: 600; color: #f8fafc; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 24px; color: #475569; font-size: 11px; border-top: 1px solid #1f2937; margin-top: 24px; }
+
+        /* Utility */
+        .flex { display: flex; }
+        .gap-8 { gap: 8px; }
+        .mt-12 { margin-top: 12px; }
+        .mb-8 { margin-bottom: 8px; }
+        .font-mono { font-family: 'SF Mono', 'Consolas', monospace; }
+        .flex-between { display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-badge">📊 年度预算报告</div>
+    <h1>铠程铠骏 2026年度预算分析报告</h1>
+    <div class="subtitle">吉利远程新能源商用车 · 兴庆事业部</div>
+    <div class="meta">
+        <span>📅 预算年度：2026年1月1日 — 12月31日</span>
+        <span>📌 报表类型：年度预算终表</span>
+        <span>🔢 数据口径：元（保留一位小数）</span>
+    </div>
+</div>
+
+<!-- KPI Row -->
+<div class="kpi-row">
+    <div class="kpi success">
+        <div class="kpi-label">2026预算整车销量</div>
+        <div class="kpi-value">503台</div>
+        <div class="kpi-sub">同比 +61.7%（2025年311台）</div>
+    </div>
+    <div class="kpi high">
+        <div class="kpi-label">主营业务收入预算</div>
+        <div class="kpi-value">¥5,336万</div>
+        <div class="kpi-sub">同比 +51.1%（2025年3,531万）</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">毛利额预算</div>
+        <div class="kpi-value">¥562万</div>
+        <div class="kpi-sub">同比 +51.4%（2025年371万）</div>
+    </div>
+    <div class="kpi purple">
+        <div class="kpi-label">毛利率</div>
+        <div class="kpi-value">10.5%</div>
+        <div class="kpi-sub">基本持平（2025年10.5%）</div>
+    </div>
+</div>
+
+<div style="padding: 24px 32px 0;">
+    <div class="insight warning">
+        <strong>核心结论：</strong>2026年预算销量大幅增长61.7%（503台），收入增长51.1%（5,336万）。整车销售仍是收入核心（占比97.4%），但维修和衍生业务增速更快。毛利率维持在10.5%，费用端职工薪酬大涨81%（人员扩编），需关注人效比提升。
+    </div>
+</div>
+
+<!-- Main Grid -->
+<div class="grid">
+
+    <!-- ========== 整车销量月度走势 ========== -->
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">📈</span> 一、整车销量月度预算走势</div>
+                <span class="tag tag-green">2026年预算</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 月度销量分布（单位：台）</p>
+                <div class="chart-bar">
+                    <div class="chart-label">1月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:14.8%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);">8</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">2月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:27.8%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);">15</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">3月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:63%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);">34</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">4月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:92.6%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">50</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">5月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:100%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">54</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">6月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:94.4%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">51</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">7月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:94.4%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">51</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">8月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:96.3%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">52</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">9月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:98.1%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">53</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">10月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:98.1%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">53</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">11月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:81.5%;background:linear-gradient(90deg,#a78bfa,#8b5cf6);">44</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">12月</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:70.4%;background:linear-gradient(90deg,#a78bfa,#8b5cf6);">38</div></div>
+                </div>
+
+                <div class="insight" style="margin-top:16px;">
+                    <strong>销售节奏分析：</strong>5月达年度峰值（54台），Q2（4-6月）集中冲量占全年30.8%。Q4（10-12月）占全年26.8%，年末收官平稳。淡季为1-2月（仅23台，占4.6%），建议提前布局春节后促销。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 收入结构 ========== -->
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">💰</span> 二、收入结构分析</div>
+                <span class="tag tag-blue">2026年预算</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 主营业务收入构成（万元）</p>
+
+                <div style="margin-bottom:16px;">
+                    <div class="flex-between mb-8">
+                        <span class="channel-name">整车销售</span>
+                        <span class="channel-value text-gold">5,197万 <span class="growth up">+51.2%</span></span>
+                    </div>
+                    <div class="progress"><div class="progress-fill gold" style="width:97.4%;"></div></div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px;">占比 97.4% · 毛利 ¥459万</div>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <div class="flex-between mb-8">
+                        <span class="channel-name">维修养护</span>
+                        <span class="channel-value text-blue">54万 <span class="growth down">-1.3%</span></span>
+                    </div>
+                    <div class="progress"><div class="progress-fill blue" style="width:10.1%;"></div></div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px;">占比 1.0% · 毛利 ¥28万</div>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <div class="flex-between mb-8">
+                        <span class="channel-name">返利收入</span>
+                        <span class="channel-value text-green">126万 <span class="growth up">+143.5%</span></span>
+                    </div>
+                    <div class="progress"><div class="progress-fill green" style="width:23.6%;"></div></div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px;">占比 2.4% · 政策返利到账</div>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <div class="flex-between mb-8">
+                        <span class="channel-name">衍生业务</span>
+                        <span class="channel-value text-purple">85万 <span class="growth up">+116.1%</span></span>
+                    </div>
+                    <div class="progress"><div class="progress-fill purple" style="width:15.9%;"></div></div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px;">占比 1.6% · 含车贷/装潢/佣金</div>
+                </div>
+
+                <div class="insight success">
+                    <strong>业务结构亮点：</strong>整车销售仍是绝对主力，但<strong>返利收入增长143.5%</strong>反映主机厂政策支持加大，<strong>衍生业务翻倍增长</strong>说明后市场开拓见效。建议加强维修业务（同比微降1.3%，应提升）。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 整车渠道分解 ========== -->
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">🏬</span> 三、整车销售渠道分解</div>
+                <span class="tag tag-gold">2026年预算</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 整车收入按渠道（万元）</p>
+
+                <div class="chart-bar">
+                    <div class="chart-label">展厅渠道</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:100%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">2,406万</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">外拓渠道</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:89.2%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">2,075万</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">新媒体</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:68%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);">820万</div></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">二网渠道</div>
+                    <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:63.8%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);">770万</div></div>
+                </div>
+
+                <div class="mt-12" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;">
+                    <div class="mini-stat">
+                        <div class="value text-gold">46.3%</div>
+                        <div class="label">展厅占比</div>
+                        <div class="sub">2,406万</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="value text-gold">37.6%</div>
+                        <div class="label">外拓占比</div>
+                        <div class="sub">1,075万</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="value text-blue">15.8%</div>
+                        <div class="label">新媒体占比</div>
+                        <div class="sub">820万</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="value text-blue">14.8%</div>
+                        <div class="label">二网占比</div>
+                        <div class="sub">770万</div>
+                    </div>
+                </div>
+
+                <div class="insight warning">
+                    <strong>注意：</strong>外拓+二网合计占比<strong>52.4%</strong>，超过展厅（46.3%）。说明直销能力依赖外拓地推团队，需持续投入外拓人员激励。新媒体占比15.8%是新增增量来源。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 车型分析 ========== -->
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">🚐</span> 四、车型返利结构分析</div>
+                <span class="tag tag-purple">2026年预算</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 车型单台返利排名（厂商返利+运营积分）</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>车型</th>
+                            <th>指导价</th>
+                            <th>售价</th>
+                            <th>进价</th>
+                            <th>单台返利</th>
+                            <th>级别</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="text-gold">超级VAN</span></td>
+                            <td class="text-right">¥143,000</td>
+                            <td class="text-right">¥115,000</td>
+                            <td class="text-right">¥115,000</td>
+                            <td class="text-right text-gold">¥5,500</td>
+                            <td><span class="tag tag-gold">第一梯队</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-gold">F3E</span></td>
+                            <td class="text-right">¥115,900</td>
+                            <td class="text-right">¥99,000</td>
+                            <td class="text-right">¥88,000</td>
+                            <td class="text-right text-gold">¥1,900</td>
+                            <td><span class="tag tag-green">第二梯队</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-green">V7E</span></td>
+                            <td class="text-right">¥89,500</td>
+                            <td class="text-right">¥82,500</td>
+                            <td class="text-right">¥78,000</td>
+                            <td class="text-right text-green">¥1,300</td>
+                            <td><span class="tag tag-green">第二梯队</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-green">V8E</span></td>
+                            <td class="text-right">¥99,900</td>
+                            <td class="text-right">¥91,900</td>
+                            <td class="text-right">¥82,900</td>
+                            <td class="text-right text-green">¥1,300</td>
+                            <td><span class="tag tag-green">第二梯队</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-blue">H8E</span></td>
+                            <td class="text-right">¥155,000</td>
+                            <td class="text-right">¥127,900</td>
+                            <td class="text-right">¥115,000</td>
+                            <td class="text-right text-blue">¥1,200</td>
+                            <td><span class="tag tag-blue">第三梯队</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-blue">F1E</span></td>
+                            <td class="text-right">¥81,400</td>
+                            <td class="text-right">¥69,900</td>
+                            <td class="text-right">¥61,250</td>
+                            <td class="text-right text-blue">¥1,500</td>
+                            <td><span class="tag tag-blue">第三梯队</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-purple">V6E</span></td>
+                            <td class="text-right">¥76,500</td>
+                            <td class="text-right">¥68,000</td>
+                            <td class="text-right">¥63,600</td>
+                            <td class="text-right text-purple">¥500</td>
+                            <td><span class="tag tag-purple">第四梯队</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insight success">
+                    <strong>车型策略建议：</strong><strong>超级VAN单台返利¥5,500</strong>为最高，应全力推广。F1E虽然指导价低，但含目标达成返利¥1,000，实际返利达¥1,500。V6E返利最低（¥500），可作为走量车型但不作为利润来源。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 费用预算 ========== -->
+    <div class="col-7">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">💸</span> 五、费用预算分析</div>
+                <span class="tag tag-red">2026年预算</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 主要费用项目（2025 vs 2026）</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>费用项目</th>
+                            <th class="text-right">2025年实际</th>
+                            <th class="text-right">2026年预算</th>
+                            <th class="text-right">增长率</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="text-red">职工薪酬小计</span></td>
+                            <td class="text-right">¥121.8万</td>
+                            <td class="text-right">¥220.4万</td>
+                            <td class="text-right"><span class="growth up">+81.0%</span></td>
+                            <td>人员扩编+奖金调整</td>
+                        </tr>
+                        <tr>
+                            <td>— 工资</td>
+                            <td class="text-right">¥83.4万</td>
+                            <td class="text-right">¥88.1万</td>
+                            <td class="text-right"><span class="growth up">+5.6%</span></td>
+                            <td>正常调薪</td>
+                        </tr>
+                        <tr>
+                            <td>— 奖金</td>
+                            <td class="text-right">¥23.9万</td>
+                            <td class="text-right">¥91.2万</td>
+                            <td class="text-right"><span class="growth up">+281.1%</span></td>
+                            <td>工资拆分，绩效导向</td>
+                        </tr>
+                        <tr>
+                            <td>— 社保（养老/医疗）</td>
+                            <td class="text-right">¥13.8万</td>
+                            <td class="text-right">¥38.2万</td>
+                            <td class="text-right"><span class="growth up">+177.5%</span></td>
+                            <td>人员增加+缴费基数调整</td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-gold">业务宣传/广告费</span></td>
+                            <td class="text-right">¥24.3万</td>
+                            <td class="text-right">¥44.4万</td>
+                            <td class="text-right"><span class="growth up">+83.1%</span></td>
+                            <td>市场拓展加大投入</td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-green">车辆使用费</span></td>
+                            <td class="text-right">¥10.8万</td>
+                            <td class="text-right">¥5.6万</td>
+                            <td class="text-right"><span class="growth down">-47.9%</span></td>
+                            <td>试驾车/充电费用压缩</td>
+                        </tr>
+                        <tr>
+                            <td>保险费</td>
+                            <td class="text-right">¥0.7万</td>
+                            <td class="text-right">¥2.0万</td>
+                            <td class="text-right"><span class="growth up">+178.6%</span></td>
+                            <td>新增3辆试驾车+企财险</td>
+                        </tr>
+                        <tr>
+                            <td>差旅费</td>
+                            <td class="text-right">¥4.9万</td>
+                            <td class="text-right">¥3.1万</td>
+                            <td class="text-right"><span class="growth down">-38.0%</span></td>
+                            <td>财务归口调整</td>
+                        </tr>
+                        <tr>
+                            <td>业务招待费</td>
+                            <td class="text-right">¥6.4万</td>
+                            <td class="text-right">¥2.9万</td>
+                            <td class="text-right"><span class="growth down">-54.7%</span></td>
+                            <td>大客户招待控制</td>
+                        </tr>
+                        <tr>
+                            <td>办公/邮电费</td>
+                            <td class="text-right">¥10.1万</td>
+                            <td class="text-right">¥6.2万</td>
+                            <td class="text-right"><span class="growth down">-38.6%</span></td>
+                            <td>降本增效</td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-purple">税费（增值税附加等）</span></td>
+                            <td class="text-right">¥36.4万</td>
+                            <td class="text-right">¥71.5万</td>
+                            <td class="text-right"><span class="growth up">+96.3%</span></td>
+                            <td>收入规模扩大，增值税增加</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insight danger">
+                    <strong>⚠️ 费用管控重点：</strong>职工薪酬大涨81%（+98.6万）是最大增量，需配套<strong>人效提升计划</strong>。税费增长96%与收入规模同步，属正常增长。广告费+83%需验证ROI，差旅招待压减效果明显。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 职工薪酬拆解 ========== -->
+    <div class="col-5">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">👥</span> 六、职工薪酬结构</div>
+                <span class="tag tag-red">最大费用项</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 2026年职工薪酬明细</p>
+
+                <div class="mini-grid" style="margin-bottom:16px;">
+                    <div class="mini-stat">
+                        <div class="value text-gold">¥88.1万</div>
+                        <div class="label">工资</div>
+                        <div class="sub">占薪酬40%</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="value text-green">¥91.2万</div>
+                        <div class="label">奖金</div>
+                        <div class="sub">占薪酬41%</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="value text-blue">¥38.2万</div>
+                        <div class="label">社保公积金</div>
+                        <div class="sub">养老/医疗/失业</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="value text-purple">¥1.1万</div>
+                        <div class="label">职工福利</div>
+                        <div class="sub">工服定制</div>
+                    </div>
+                </div>
+
+                <div style="margin:16px 0;">
+                    <div style="font-size:12px;color:#64748b;margin-bottom:8px;">薪酬结构占比</div>
+                    <div style="display:flex;height:12px;border-radius:6px;overflow:hidden;gap:2px;">
+                        <div style="flex:40;background:linear-gradient(90deg,#fbbf24,#f59e0b);border-radius:6px;" title="工资40%"></div>
+                        <div style="flex:41;background:linear-gradient(90deg,#34d399,#10b981);border-radius:6px;" title="奖金41%"></div>
+                        <div style="flex:17;background:linear-gradient(90deg,#38bdf8,#0ea5e9);border-radius:6px;" title="社保17%"></div>
+                        <div style="flex:2;background:linear-gradient(90deg,#a78bfa,#8b5cf6);border-radius:6px;" title="福利2%"></div>
+                    </div>
+                    <div style="display:flex;gap:16px;margin-top:8px;font-size:11px;color:#94a3b8;">
+                        <span>🟡 工资 40%</span>
+                        <span>🟢 奖金 41%</span>
+                        <span>🔵 社保 17%</span>
+                        <span>🟣 福利 2%</span>
+                    </div>
+                </div>
+
+                <div class="insight warning">
+                    <strong>薪酬设计分析：</strong>奖金占薪酬总额<strong>41%</strong>，说明薪酬与业绩强挂钩（绩效导向）。社保增长177%反映新增人员基数，配套的人效目标需明确——503台销量目标对应的人效要求是否合理？
+                </div>
+
+                <div style="margin-top:16px;">
+                    <div style="font-size:12px;color:#64748b;margin-bottom:8px;">与收入比</div>
+                    <div class="chart-bar">
+                        <div class="chart-label">薪酬/收入</div>
+                        <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:41.3%;background:linear-gradient(90deg,#f87171,#ef4444);">4.1%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">薪酬/毛利</div>
+                        <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:100%;background:linear-gradient(90deg,#fbbf24,#f59e0b);">39.2%</div></div>
+                </div>
+                <div style="font-size:11px;color:#64748b;margin-top:4px;">职工薪酬占毛利额39.2%——人效管理是关键</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 维修月度走势 ========== -->
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">🔧</span> 七、维修业务月度预算（下半年启动）</div>
+                <span class="tag tag-blue">2026年预算</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 维修台次月度分布</p>
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px;">
+                    <div class="mini-stat" style="background:#1f2937;">
+                        <div class="value text-purple">7月</div>
+                        <div class="label" style="color:#64748b;">136台</div>
+                    </div>
+                    <div class="mini-stat" style="background:#1f2937;">
+                        <div class="value text-purple">8月</div>
+                        <div class="label" style="color:#64748b;">132台</div>
+                    </div>
+                    <div class="mini-stat" style="background:#1f2937;">
+                        <div class="value text-purple">9月</div>
+                        <div class="label" style="color:#64748b;">132台</div>
+                    </div>
+                    <div class="mini-stat" style="background:#1f2937;">
+                        <div class="value text-purple">10月</div>
+                        <div class="label" style="color:#64748b;">124.7台</div>
+                    </div>
+                    <div class="mini-stat" style="background:#1f2937;">
+                        <div class="value text-purple">11月</div>
+                        <div class="label" style="color:#64748b;">130台</div>
+                    </div>
+                    <div class="mini-stat" style="background:#1f2937;">
+                        <div class="value text-purple">12月</div>
+                        <div class="label" style="color:#64748b;">131台</div>
+                    </div>
+                </div>
+
+                <div class="insight danger">
+                    <strong>⚠️ 异常发现：</strong>维修业务预算<strong>仅下半年</strong>（7-12月）计列台次（785.7台），上半年台次为0。这可能是预算口径问题（维修业务归属调整），也可能是实际业务淡旺季明显。建议确认：<br>
+                    1. 上半年维修业务是否并入其他口径？<br>
+                    2. 还是维修业务确实下半年才启动？<br>
+                    若口径正确，维修业务预算可能被低估。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 核心指标汇总 ========== -->
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">📋</span> 八、核心经营指标</div>
+                <span class="tag tag-blue">2026年 vs 2025年</span>
+            </div>
+            <div class="card-body">
+                <p class="section-title">▎ 关键预算指标对比</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>指标</th>
+                            <th class="text-right">2025年实际</th>
+                            <th class="text-right">2026年预算</th>
+                            <th class="text-right">变化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>整车销量</td>
+                            <td class="text-right">311台</td>
+                            <td class="text-right">503台</td>
+                            <td class="text-right"><span class="growth up">+61.7%</span></td>
+                        </tr>
+                        <tr>
+                            <td>整车收入</td>
+                            <td class="text-right">¥3,437万</td>
+                            <td class="text-right">¥5,197万</td>
+                            <td class="text-right"><span class="growth up">+51.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>整车成本</td>
+                            <td class="text-right">¥3,129万</td>
+                            <td class="text-right">¥4,738万</td>
+                            <td class="text-right"><span class="growth up">+51.4%</span></td>
+                        </tr>
+                        <tr>
+                            <td>整车毛利</td>
+                            <td class="text-right">¥307万</td>
+                            <td class="text-right">¥459万</td>
+                            <td class="text-right"><span class="growth up">+49.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>整车毛利率</td>
+                            <td class="text-right">9.0%</td>
+                            <td class="text-right">8.8%</td>
+                            <td class="text-right"><span class="growth down">-0.2pp</span></td>
+                        </tr>
+                        <tr>
+                            <td>维修收入</td>
+                            <td class="text-right">¥54.6万</td>
+                            <td class="text-right">¥53.9万</td>
+                            <td class="text-right"><span class="growth down">-1.3%</span></td>
+                        </tr>
+                        <tr>
+                            <td>维修毛利</td>
+                            <td class="text-right">¥25.4万</td>
+                            <td class="text-right">¥28.0万</td>
+                            <td class="text-right"><span class="growth up">+10.6%</span></td>
+                        </tr>
+                        <tr>
+                            <td>维修毛利率</td>
+                            <td class="text-right">46.4%</td>
+                            <td class="text-right">52.0%</td>
+                            <td class="text-right"><span class="growth up">+5.6pp</span></td>
+                        </tr>
+                        <tr>
+                            <td>返利收入</td>
+                            <td class="text-right">¥51.6万</td>
+                            <td class="text-right">¥125.6万</td>
+                            <td class="text-right"><span class="growth up">+143.5%</span></td>
+                        </tr>
+                        <tr>
+                            <td>衍生收入</td>
+                            <td class="text-right">¥39.2万</td>
+                            <td class="text-right">¥84.8万</td>
+                            <td class="text-right"><span class="growth up">+116.1%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insight success">
+                    <strong>关键信号：</strong>维修毛利率提升5.6pp至52%，说明后市场运营质量提升。返利和衍生收入翻倍增长是2026年利润补充的重要来源。但整车毛利率微降0.2pp，需关注整车价格压力。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 重要发现 ========== -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">🔍</span> 九、预算风险与建议</div>
+            </div>
+            <div class="card-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+                    <div>
+                        <p class="section-title">⚠️ 风险项</p>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div class="insight danger" style="margin:0;">
+                                <strong>1. 销量目标激进</strong><br>
+                                503台 vs 2025年311台，增长61.7%。需确认市场容量是否支撑，固原/吴忠二网能否承接增量。
+                            </div>
+                            <div class="insight danger" style="margin:0;">
+                                <strong>2. 薪酬占比过高</strong><br>
+                                职工薪酬占毛利39.2%，若销量不达目标，人力成本刚性压力显著。
+                            </div>
+                            <div class="insight danger" style="margin:0;">
+                                <strong>3. 维修业务口径存疑</strong><br>
+                                全年785.7台全部计列在下半年，上半年为0，需核实预算编制逻辑。
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-title">🎯 机会项</p>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div class="insight success" style="margin:0;">
+                                <strong>1. 超级VAN高返利</strong><br>
+                                单台返利¥5,500，为最高优先级推广车型，应重点向二网/大客户推送。
+                            </div>
+                            <div class="insight success" style="margin:0;">
+                                <strong>2. 返利政策利好</strong><br>
+                                2026年返利收入预算¥125.6万，同比+143.5%，主机厂支持力度大，用足政策是关键。
+                            </div>
+                            <div class="insight success" style="margin:0;">
+                                <strong>3. 衍生业务翻倍</strong><br>
+                                车贷+装潢+佣金代理合计¥84.8万，可作为利润补充，重点提升车贷渗透率。
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-title">📌 行动建议</p>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <div class="insight" style="margin:0;">
+                                <strong>1. 分解Q1冲量计划</strong><br>
+                                1-2月仅23台（占全年4.6%），春节后立即启动促销，避免Q1缺口拖累全年目标。
+                            </div>
+                            <div class="insight" style="margin:0;">
+                                <strong>2. 外拓团队绩效挂勾</strong><br>
+                                外拓+二网占销量52.4%，建议将外拓人员奖金与新渠道开发数量挂钩。
+                            </div>
+                            <div class="insight" style="margin:0;">
+                                <strong>3. 维修业务补强</strong><br>
+                                维修毛利率52%且高于整车，应将维修台次目标分解到各月，避免下半年集中。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>铠程铠骏 · 吉利远程新能源商用车兴庆事业部 · 2026年度预算报告</p>
+    <p>数据来源：2026年度预算文件3.5.xlsx（终表） · 生成时间：2026年5月</p>
+</div>
+
+</body>
+</html>
