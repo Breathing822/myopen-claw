@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>昊铂埃安BU垂媒支持政策报告 - 2026年5-12月</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        
+        /* Header */
+        .header { text-align: center; margin-bottom: 32px; padding: 32px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 16px; border: 1px solid #475569; }
+        .header h1 { font-size: 28px; color: #f8fafc; margin-bottom: 8px; }
+        .header .subtitle { color: #94a3b8; font-size: 14px; }
+        .header .date { color: #64748b; font-size: 12px; margin-top: 12px; }
+        
+        /* Warning Banner */
+        .warning-banner { background: rgba(234, 179, 8, 0.1); border: 1px solid #f59e0b; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .warning-banner .icon { font-size: 24px; }
+        .warning-banner .text { color: #fbbf24; font-size: 14px; }
+        
+        /* Summary Cards */
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .summary-card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+        .summary-card .label { color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .summary-card .value { font-size: 28px; font-weight: 700; color: #f8fafc; }
+        .summary-card .sub { color: #64748b; font-size: 12px; margin-top: 4px; }
+        .summary-card.highlight { border-color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .summary-card.highlight .value { color: #22c55e; }
+        
+        /* Section */
+        .section { background: #1e293b; border-radius: 12px; padding: 24px; border: 1px solid #334155; margin-bottom: 24px; }
+        .section h2 { font-size: 18px; color: #f8fafc; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #334155; }
+        
+        /* Table */
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #334155; }
+        .table th { color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+        .table td { color: #e2e8f0; font-size: 14px; }
+        .table tr:last-child td { border-bottom: none; }
+        .table .highlight { color: #22c55e; font-weight: 600; }
+        
+        /* Cost Breakdown */
+        .cost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+        .cost-card { background: #0f172a; border-radius: 8px; padding: 16px; }
+        .cost-card h4 { color: #94a3b8; font-size: 14px; margin-bottom: 12px; }
+        .cost-card .amount { font-size: 24px; font-weight: 700; color: #f8fafc; }
+        .cost-card .breakdown { display: flex; gap: 16px; margin-top: 8px; }
+        .cost-card .breakdown span { font-size: 12px; }
+        .cost-card .breakdown .manufacturer { color: #22c55e; }
+        .cost-card .breakdown .dealer { color: #f59e0b; }
+        
+        /* Contact Cards */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .contact-card { background: #0f172a; border-radius: 8px; padding: 14px; display: flex; justify-content: space-between; align-items: center; }
+        .contact-card .info h4 { color: #f8fafc; font-size: 14px; margin-bottom: 4px; }
+        .contact-card .info .region { color: #64748b; font-size: 12px; }
+        .contact-card .info .email { color: #94a3b8; font-size: 12px; margin-top: 4px; }
+        .contact-card .phone { color: #22c55e; font-size: 14px; font-weight: 600; }
+        
+        /* Period Timeline */
+        .timeline { display: flex; gap: 8px; margin-top: 16px; }
+        .timeline-item { flex: 1; background: #0f172a; border-radius: 8px; padding: 16px; text-align: center; }
+        .timeline-item .period { color: #94a3b8; font-size: 12px; margin-bottom: 4px; }
+        .timeline-item .dates { color: #f8fafc; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .timeline-item .quota { color: #64748b; font-size: 11px; }
+        .timeline-item.active { border: 1px solid #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .timeline-item.active .dates { color: #22c55e; }
+        
+        /* Platform Cards */
+        .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .platform-card { background: #0f172a; border-radius: 8px; padding: 20px; text-align: center; }
+        .platform-card .name { font-size: 18px; font-weight: 600; color: #f8fafc; margin-bottom: 8px; }
+        .platform-card .support { font-size: 32px; font-weight: 700; color: #22c55e; }
+        .platform-card .support-label { color: #64748b; font-size: 12px; }
+        
+        /* Condition List */
+        .condition-list { list-style: none; }
+        .condition-list li { padding: 12px 0; border-bottom: 1px solid #334155; display: flex; gap: 12px; align-items: flex-start; }
+        .condition-list li:last-child { border-bottom: none; }
+        .condition-list .bullet { color: #22c55e; font-weight: bold; }
+        .condition-list .text { color: #e2e8f0; font-size: 14px; line-height: 1.6; }
+        .condition-list .text strong { color: #f8fafc; }
+        
+        /* Footer */
+        .footer { text-align: center; padding: 24px; color: #64748b; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 昊铂埃安BU垂媒支持政策报告</h1>
+            <p class="subtitle">2026年5-12月 · 融合店垂媒平台支持政策解读</p>
+            <p class="date">生成时间：2026年5月20日 | 报告编号：HP-MEDIA-2026Q2-001</p>
+        </div>
+        
+        <!-- Warning -->
+        <div class="warning-banner">
+            <span class="icon">⚠️</span>
+            <span class="text">本报告内容仅限昊铂埃安BU、埃安渠道员工查阅，请勿外传</span>
+        </div>
+        
+        <!-- Summary Cards -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="label">支持周期</div>
+                <div class="value">8个月</div>
+                <div class="sub">2026年5月 - 12月</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">核销次数</div>
+                <div class="value">3次</div>
+                <div class="sub">按季度核销</div>
+            </div>
+            <div class="summary-card highlight">
+                <div class="label">主机厂补贴比例</div>
+                <div class="value">52%</div>
+                <div class="sub">门店仅需承担48%</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">支持平台</div>
+                <div class="value">3个</div>
+                <div class="sub">懂车帝 / 汽车之家 / 易车</div>
+            </div>
+        </div>
+        
+        <!-- Policy Period -->
+        <div class="section">
+            <h2>📅 核销周期</h2>
+            <div class="timeline">
+                <div class="timeline-item active">
+                    <div class="period">第一季度</div>
+                    <div class="dates">5-6月</div>
+                    <div class="quota">提车≥4台 或 月均≥2台</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="period">第二季度</div>
+                    <div class="dates">7-9月</div>
+                    <div class="quota">季度提车≥6台</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="period">第三季度</div>
+                    <div class="dates">10-12月</div>
+                    <div class="quota">季度提车≥6台</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Qualification Requirements -->
+        <div class="section">
+            <h2>✅ 核销前提条件</h2>
+            <ul class="condition-list">
+                <li>
+                    <span class="bullet">1.</span>
+                    <span class="text"><strong>月度提车要求：</strong>每月提车总数达到 <strong>2台</strong>，即可进行当月核销</span>
+                </li>
+                <li>
+                    <span class="bullet">2.</span>
+                    <span class="text"><strong>季度提车要求：</strong>每季度提车总数达到 <strong>6台</strong>，可进行季度整体核销<br>
+                    <span style="color:#64748b; font-size:12px;">例：7-9月提车总数6台，即可进行第二季度核销；若7-9月总数<6台，但8月单月≥2台，可进行8月月度核销</span></span>
+                </li>
+                <li>
+                    <span class="bullet">3.</span>
+                    <span class="text"><strong>5-6月特殊规则：</strong>5-6月提车总数≥4台方可核销；若总数<4台，但6月单月≥2台，可进行6月月度核销</span>
+                </li>
+                <li>
+                    <span class="bullet">4.</span>
+                    <span class="text"><strong>在线要求：</strong>季度末最后一天前（含）下线的平台，当季度不予核销</span>
+                </li>
+                <li>
+                    <span class="bullet">5.</span>
+                    <span class="text"><strong>开通不足一个月：</strong>按开通天数计算补贴，5月按全月补贴/当月天数×在线天数；6月后按全月补贴/当月天数×在线天数×80%</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Platform Support -->
+        <div class="section">
+            <h2>🏢 支持平台</h2>
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <div class="name">懂车帝</div>
+                    <div class="support">52%</div>
+                    <div class="support-label">双品牌增开部分</div>
+                    <p style="color:#94a3b8; font-size:11px; margin-top:8px;">可添加埃安可售卖车型</p>
+                </div>
+                <div class="platform-card">
+                    <div class="name">汽车之家</div>
+                    <div class="support">52%</div>
+                    <div class="support-label">双品牌增开部分</div>
+                    <p style="color:#94a3b8; font-size:11px; margin-top:8px;">单品牌按原政策执行</p>
+                </div>
+                <div class="platform-card">
+                    <div class="name">易车</div>
+                    <div class="support">52%</div>
+                    <div class="support-label">双品牌增开部分</div>
+                    <p style="color:#94a3b8; font-size:11px; margin-top:8px;">单品牌按原政策执行</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cost Calculation - Autohome -->
+        <div class="section">
+            <h2>💰 汽车之家集采价格</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>城市等级</th>
+                        <th>昊铂门店增开双品牌价格(D)</th>
+                        <th>主机厂补贴(52%)</th>
+                        <th>门店实际支出(48%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S级城市</td>
+                        <td>¥91,166</td>
+                        <td class="highlight">¥47,406</td>
+                        <td>¥43,760</td>
+                    </tr>
+                    <tr>
+                        <td>A级城市</td>
+                        <td>¥79,555</td>
+                        <td class="highlight">¥41,369</td>
+                        <td>¥38,186</td>
+                    </tr>
+                    <tr>
+                        <td>B级城市</td>
+                        <td>¥55,674</td>
+                        <td class="highlight">¥28,950</td>
+                        <td>¥26,724</td>
+                    </tr>
+                    <tr>
+                        <td>C级城市</td>
+                        <td>¥21,525</td>
+                        <td class="highlight">¥11,193</td>
+                        <td>¥10,332</td>
+                    </tr>
+                    <tr>
+                        <td>D级城市</td>
+                        <td>¥11,661</td>
+                        <td class="highlight">¥6,064</td>
+                        <td>¥5,597</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color:#64748b; font-size:12px; margin-top:12px;">*以上为全年开通价格，按天开通按实际天数计算；签约方式：单签单付</p>
+        </div>
+        
+        <!-- Cost Calculation - Yiche -->
+        <div class="section">
+            <h2>💰 易车集采价格</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>城市等级</th>
+                        <th>昊铂门店增开双品牌价格(D)</th>
+                        <th>主机厂补贴(52%)</th>
+                        <th>门店实际支出(48%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S级城市</td>
+                        <td>¥124,213</td>
+                        <td class="highlight">¥64,591</td>
+                        <td>¥59,622</td>
+                    </tr>
+                    <tr>
+                        <td>A级城市</td>
+                        <td>¥109,954</td>
+                        <td class="highlight">¥57,176</td>
+                        <td>¥52,778</td>
+                    </tr>
+                    <tr>
+                        <td>B级城市</td>
+                        <td>¥75,695</td>
+                        <td class="highlight">¥39,361</td>
+                        <td>¥36,334</td>
+                    </tr>
+                    <tr>
+                        <td>C级城市</td>
+                        <td>¥48,161</td>
+                        <td class="highlight">¥25,044</td>
+                        <td>¥23,117</td>
+                    </tr>
+                    <tr>
+                        <td>D级城市</td>
+                        <td>¥36,666</td>
+                        <td class="highlight">¥19,066</td>
+                        <td>¥17,600</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color:#64748b; font-size:12px; margin-top:12px;">*易车增开双品牌价格高于汽车之家，S级城市差距达¥33,047</p>
+        </div>
+        
+        <!-- Dual Brand Info -->
+        <div class="section">
+            <h2>🔗 双品牌开通说明</h2>
+            <ul class="condition-list">
+                <li>
+                    <span class="bullet">•</span>
+                    <span class="text">昊铂品牌开通汽车之家/易车后，可<strong>免费添加3款埃安品牌车系</strong>（5月起调整为i60、N60、RT车系）</span>
+                </li>
+                <li>
+                    <span class="bullet">•</span>
+                    <span class="text">如需开通<strong>全部车系</strong>，需开通双品牌，增开部分按双品牌支持政策执行（52%补贴）</span>
+                </li>
+                <li>
+                    <span class="bullet">•</span>
+                    <span class="text">懂车帝可按门店可售卖埃安车系进行添加，联系区域新媒体经理报备开通</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Contact Info -->
+        <div class="section">
+            <h2>📞 区域新媒体经理联系方式</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="info">
+                        <h4>池泓</h4>
+                        <p class="region">华南一区</p>
+                        <p class="email">chihong@gac.com.cn</p>
+                    </div>
+                    <span class="phone">15622728697</span>
+                </div>
+                <div class="contact-card">
+                    <div class="info">
+                        <h4>何梓凌</h4>
+                        <p class="region">华南二区 / 湖南专区</p>
+                        <p class="email">heziling@gac.com.cn</p>
+                    </div>
+                    <span class="phone">17278685951</span>
+                </div>
+                <div class="contact-card">
+                    <div class="info">
+                        <h4>林毓杰</h4>
+                        <p class="region">华北区</p>
+                        <p class="email">linyujie@gac.com.cn</p>
+                    </div>
+                    <span class="phone">18039054219</span>
+                </div>
+                <div class="contact-card">
+                    <div class="info">
+                        <h4>魏正坚</h4>
+                        <p class="region">华东区 / 东北区 / 北京专区</p>
+                        <p class="email">weizhengjian@gac.com.cn</p>
+                    </div>
+                    <span class="phone">13670788545</span>
+                </div>
+                <div class="contact-card">
+                    <div class="info">
+                        <h4>丁灿杰</h4>
+                        <p class="region">华中区</p>
+                        <p class="email">dingcanjie@gac.com.cn</p>
+                    </div>
+                    <span class="phone">13760748459</span>
+                </div>
+                <div class="contact-card">
+                    <div class="info">
+                        <h4>张子正</h4>
+                        <p class="region">西区 / 云贵专区</p>
+                        <p class="email">zhangzizheng@gac.com.cn</p>
+                    </div>
+                    <span class="phone">19520987631</span>
+                </div>
+                <div class="contact-card">
+                    <div class="info">
+                        <h4>刘秋琰</h4>
+                        <p class="region">山东专区</p>
+                        <p class="email">liuqiuyan@gac.com.cn</p>
+                    </div>
+                    <span class="phone">15814597386</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dengche DIY Link -->
+        <div class="section">
+            <h2>🚗 懂车帝开通报备链接</h2>
+            <p style="color:#94a3b8; font-size:14px; margin-bottom:16px;">门店在开通昊铂懂车帝后可添加埃安可售卖车型，使用下方链接进行报备：</p>
+            <p style="color:#22c55e; font-size:14px; word-break:break-all;">https://gacaion.jinshuju.com/f/sP77pf</p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>报告生成：总监虾 🦞</p>
+            <p>数据来源：昊铂埃安BU用户发展部 · 2026年5月3日发布</p>
+        </div>
+    </div>
+</body>
+</html>
